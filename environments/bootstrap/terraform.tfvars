@@ -23,10 +23,11 @@ buckets = [
 create_gcs_backend = true
 service_accounts = [
   {
-    id           = "secret-manager-sa"
-    display_name = "secret-manager-sa"
+    id           = "ansible-sa"
+    display_name = "ansible-sa"
     roles = [
       "roles/secretmanager.secretAccessor",
+      "roles/compute.viewer"
     ]
     create_key = false
   },

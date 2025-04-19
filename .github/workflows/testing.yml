@@ -9,6 +9,7 @@ on:
       - '.github/workflows/testing.yml'
       - '.github/workflows/terraform-apply.yml'  
       - '.github/workflows/terraform-destroy.yml'  
+      - '.github/workflows/trigger-workflow.yml'  
   workflow_dispatch:
 
 jobs:
@@ -29,11 +30,11 @@ jobs:
     with:
       environment: testing
       github-runner: ubuntu-22.04
-      repo: akatsantonis/ansible
+      repo: akatsantonis/gcloud_ansible
       workflow_file: testing.yml
     secrets:
       GITHUB_REPO_TOKEN: ${{ secrets.ANSIBLE_REPO_TOKEN }}
-    needs: [apply]
+    needs: [provision]
   deprovision:
     if: github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/terraform-destroy.yml
